@@ -14,7 +14,7 @@ export async function getImagesByQuery(query) {
         safesearch: true,
       },
     });
-    return response.data.hits; // масив зображень
+    return response.data.hits; 
   } catch (error) {
     console.error('Pixabay API error:', error);
     throw error;
