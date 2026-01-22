@@ -6,8 +6,9 @@ import "izitoast/dist/css/iziToast.min.css";
 
 const galleryElement = document.querySelector(".gallery");
 let lightbox = new SimpleLightbox(".gallery a");
+const loadMoreBtn = document.querySelector(".load-more");
 
-export function createGallery(images) {
+export function createGallery(images, append = false) {
   const markup = images.map(img => `
     <li class="gallery-item">
       <a href="${img.largeImageURL}">
@@ -22,7 +23,12 @@ export function createGallery(images) {
     </li>
   `).join("");
 
-  galleryElement.innerHTML = markup;
+  if (append) {
+    galleryElement.insertAdjacentHTML("beforeend", markup);
+  } else {
+    galleryElement.innerHTML = markup;
+  }
+
   lightbox.refresh();
 }
 
@@ -44,4 +50,12 @@ export function showNoResultsToast() {
     message: 'Sorry, there are no images matching your search query. Please try again!',
     position: 'topRight'
   });
+}
+
+export function showLoadMoreButton() {
+  loadMoreBtn.classList.remove("hidden");
+}
+
+export function hideLoadMoreButton() {
+  loadMoreBtn.classList.add("hidden");
 }
